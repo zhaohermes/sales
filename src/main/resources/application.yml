@@ -1,0 +1,40 @@
+server:
+  port: 8088
+  undertow:
+    accesslog:
+      enabled: true
+      dir: logs/access
+      rotate: true
+#    worker-threads: 100
+    buffer-size: 1024
+    direct-buffers: true
+    max-http-post-size: 1024
+
+spring:
+  application:
+    name: lottery-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/sales?useUnicode=true&characterEncoding=utf-8&useSSL=true
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+    type: com.alibaba.druid.pool.DruidDataSource
+    initial-size: 3
+    min-idle: 5
+    max-active: 10
+    max-wait: 10000
+    # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+    time-between-eviction-runs-millis: 60000
+    # 配置一个连接在池中最小生存的时间，单位是毫秒
+    min-evictable-idle-time-millis: 300000
+    validation-query: select 1
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+#logging:
+#  level:
+#    com.sf.lottery.mapper: DEBUG

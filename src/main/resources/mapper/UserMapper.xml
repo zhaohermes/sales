@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.yun.sales.dao.IUserDao">
+	<resultMap id="BaseResultMap" type="org.yun.sales.entity.User">
+		<id column="f_id" property="id" javaType="long" jdbcType="INTEGER" />
+		<result column="f_acc" property="acc" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result column="f_pwd" property="pwd" javaType="java.lang.String" jdbcType="VARCHAR" />
+		<result column="f_last_login_time" property="lastLoginTime" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
+		<result column="f_create_time" property="createTime" javaType="java.time.LocalDateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<insert id="insertUser" parameterType="org.yun.sales.entity.User">
+		<![CDATA[
+			INSERT INTO t_user(f_id, f_acc, f_pwd, f_create_time) VALUES(#{id}, #{acc}, #{pwd}, #{createTime})
+		]]>
+	</insert>
+
+	<select id="selectUserByAcc" parameterType="java.lang.String" resultMap="BaseResultMap">
+		<![CDATA[
+			SELECT f_id, f_acc, f_pwd, f_last_login_time, f_create_time FROM t_user WHERE f_acc = #{acc}
+		]]>
+	</select>
+	
+	<select id="selectUser" resultMap="BaseResultMap">
+		<![CDATA[
+			SELECT f_id, f_acc, f_last_login_time, f_create_time FROM t_user ORDER BY f_id
+		]]>
+	</select>
+	
+</mapper>

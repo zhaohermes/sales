@@ -8,6 +8,7 @@ import org.yun.sales.common.Constant;
 import org.yun.sales.dao.IUserDao;
 import org.yun.sales.entity.User;
 import org.yun.sales.service.IUserService;
+import org.yun.sales.utils.Tools;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -18,8 +19,14 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 
 	@Override
-	public User login(String acc, String pwd) {
-		return null;
+	public User login(String acc, String pwd) throws Exception {
+		User user = userDao.selectUserByAcc(acc);
+		if(user == null){
+			return null;
+		}else{
+			pwd = Tools.MD5(user.getId() + pwd);
+			return user.getPwd().equals(pwd) ? user : null;
+		}
 	}
 
 	@Override

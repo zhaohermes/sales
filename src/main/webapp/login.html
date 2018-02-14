@@ -27,7 +27,6 @@
 <div class="header"></div>
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
-    <form class="form form-horizontal" action="index.html" method="post">
       <div class="row cl">
         <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-xs-8">
@@ -54,11 +53,9 @@
       </div>
       <div class="row cl">
         <div class="formControls col-xs-8 col-xs-offset-3">
-          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;">
+          <input id="loginBtn" name="loginBtn" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
         </div>
       </div>
-    </form>
   </div>
 </div>
 <div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
@@ -66,6 +63,7 @@
 <script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
 <script type="text/javascript" src="js/jquery.md5.js"></script>
 <script type="text/javascript">
+var domain = 'http://localhost:8088';
 $(function() {
 	$('#loginBtn').click(function() {
 		var acc = $('#acc').val();
@@ -73,13 +71,14 @@ $(function() {
 		$.ajax({
 			url: domain + '/user/login',
 			type: 'POST',
+			async: false,
 			data: {
 				'acc': acc,
 				'pwd': $.md5(pwd)
 			},
 			success: function(result) {
 				if(result.code == 200){
-					window.localStorage.setItem('user-name', result.data.name);
+					window.localStorage.setItem('user-name', result.data.acc);
 					window.localStorage.setItem('user-token', result.data.token);
 					$(location).attr('href', 'index.html');
 				}else{
@@ -91,9 +90,34 @@ $(function() {
 			}
 		});
 	});
-	
-	getStatus();
 });
+
+function getStatus() {
+	var token = window.localStorage.getItem('user-token');
+	if(token && token.length > 0){
+		$.ajax({
+			url: domain + '/lottery/user/status',
+			type: 'POST',
+			dataType: 'json',
+			async: false,
+			beforeSend: function(xhr) {
+				xhr.setRequestHeader('Authorization', 'Basic'+token)
+			},
+			success: function (result) {
+				if(result.code == 200){
+					isLogin = true;
+					$('#welcomeSpan').html('您好，' + result.message);
+					$('#loginOrExit').val('退出').button("refresh");
+				}else{
+					window.localStorage.removeItem('token');
+				}
+			},
+			error: function (request, error) {
+				window.localStorage.removeItem('token');
+			}
+		});
+	}
+}
 </script>
 </body>
 </html>

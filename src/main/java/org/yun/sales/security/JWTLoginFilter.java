@@ -42,7 +42,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 		String type = req.getParameter("type");
 		AccountCredentials.AccountEnum accountType;
 		try {
-			accountType = type == null ? null : AccountCredentials.AccountEnum.valueOf(type);
+			accountType = "admin".equals(type) ? AccountCredentials.AccountEnum.ROLE_ADMIN : AccountCredentials.AccountEnum.ROLE_USER;
 		} catch (Exception e) {
 			logger.error("account type parameter error.", e);
 			accountType = null;

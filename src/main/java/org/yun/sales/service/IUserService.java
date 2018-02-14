@@ -10,8 +10,9 @@ public interface IUserService {
 	 * @param acc 账号
 	 * @param pwd 密码
 	 * @return 登录成功返回User对象，否则返回Null
+	 * @exception Exception 数据库操作失败或者
 	 */
-	User login(String acc, String pwd);
+	User login(String acc, String pwd) throws Exception;
 	
 	/**
 	 * 查询用户分页

@@ -52,7 +52,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			).permitAll()
 			
 			// 对以POST请求的登录放行
-			.antMatchers(HttpMethod.POST, "/user/login").permitAll()
+			.antMatchers(HttpMethod.POST, "/user/login", "/druid/**").permitAll()
 			// 权限检查
 			//.antMatchers("/lottery/**").hasAuthority("AUTH_WRITE");
 			// 角色检查

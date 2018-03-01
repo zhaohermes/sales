@@ -48,5 +48,20 @@
     "name": "spring.datasource.test-on-return",
     "type": "java.lang.Boolean",
     "description": "A description for 'spring.datasource.test-on-return'"
+  },
+  {
+    "name": "spring.datasource.filters",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.filters'"
+  },
+  {
+    "name": "spring.datasource.connection_properties",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource.connection_properties'"
+  },
+  {
+    "name": "spring.datasource.use_global_data_source_stat",
+    "type": "java.lang.Boolean",
+    "description": "A description for 'spring.datasource.use_global_data_source_stat'"
   }
 ]}

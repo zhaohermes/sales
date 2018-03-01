@@ -46,7 +46,7 @@ public class Tools {
 	 * @throws Exception
 	 */
 	public static String getJsonString(Object obj) throws JsonProcessingException {
-		ObjectMapper mapper = new ObjectMapper(); 
+		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(obj);
 		return json;
 	}

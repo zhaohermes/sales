@@ -1,123 +1,162 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="renderer" content="webkit|ie-comp|ie-stand">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<!--[if lt IE 9]>
-<script type="text/javascript" src="lib/html5shiv.js"></script>
-<script type="text/javascript" src="lib/respond.min.js"></script>
-<![endif]-->
-<link href="static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
-<link href="static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
-<link href="lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
-<!--[if IE 6]>
-<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
-<script>DD_belatedPNG.fix('*');</script>
-<![endif]-->
-<title>后台登录 - H-ui.admin v3.1</title>
-<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
-<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
-</head>
-<body>
-<input type="hidden" id="TenantId" name="TenantId" value="" />
-<div class="header"></div>
-<div class="loginWraper">
-  <div id="loginform" class="loginBox">
-      <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
-        <div class="formControls col-xs-8">
-          <input id="acc" name="acc" type="text" placeholder="账户" class="input-text size-L">
-        </div>
-      </div>
-      <div class="row cl">
-        <label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
-        <div class="formControls col-xs-8">
-          <input id="pwd" name="pwd" type="password" placeholder="密码" class="input-text size-L">
-        </div>
-      </div>
-      <!-- <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src=""> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
-      </div> -->
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <label for="online">
-            <input type="checkbox" name="online" id="online" value="">
-            使我保持登录状态</label>
-        </div>
-      </div>
-      <div class="row cl">
-        <div class="formControls col-xs-8 col-xs-offset-3">
-          <input id="loginBtn" name="loginBtn" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
-        </div>
-      </div>
-  </div>
-</div>
-<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
-<script type="text/javascript" src="js/jquery.md5.js"></script>
-<script type="text/javascript">
-var domain = 'http://localhost:8088';
-$(function() {
-	$('#loginBtn').click(function() {
-		var acc = $('#acc').val();
-		var pwd = $('#pwd').val();
-		$.ajax({
-			url: domain + '/user/login',
-			type: 'POST',
-			async: false,
-			data: {
-				'acc': acc,
-				'pwd': $.md5(pwd)
-			},
-			success: function(result) {
-				if(result.code == 200){
-					window.localStorage.setItem('user-name', result.data.acc);
-					window.localStorage.setItem('user-token', result.data.token);
-					$(location).attr('href', 'index.html');
+	<head>
+	<meta charset="utf-8">
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!--[if lt IE 9]>
+	<script type="text/javascript" src="lib/html5shiv.js"></script>
+	<script type="text/javascript" src="lib/respond.min.js"></script>
+	<![endif]-->
+	<link href="static/h-ui/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+	<link href="static/h-ui.admin/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+	<link href="static/h-ui.admin/css/style.css" rel="stylesheet" type="text/css" />
+	<link href="lib/Hui-iconfont/1.0.8/iconfont.css" rel="stylesheet" type="text/css" />
+	<!--[if IE 6]>
+	<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+	<script>DD_belatedPNG.fix('*');</script>
+	<![endif]-->
+	<title>后台登录 - H-ui.admin v3.1</title>
+	<meta name="keywords" content="H-ui.admin v3.1,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
+	<meta name="description" content="H-ui.admin v3.1，是一款由国人开发的轻量级扁平化网站后台模板，完全免费开源的网站后台管理系统模版，适合中小型CMS后台系统。">
+	</head>
+	
+	<body>
+		<input type="hidden" id="TenantId" name="TenantId" value="" />
+		<div class="header"></div>
+		<div class="loginWraper">
+			<div id="loginform" class="loginBox">
+				<form class="form form-horizontal" action="#" method="post">
+					<div class="row cl">
+						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+			        	<div class="formControls col-xs-8">
+			        		<input id="acc" name="acc" type="text" placeholder="账户" class="input-text size-L">
+			        	</div>
+					</div>
+					<div class="row cl">
+						<label class="form-label col-xs-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+				        <div class="formControls col-xs-8">
+				        	<input id="pwd" name="pwd" type="password" placeholder="密码" class="input-text size-L">
+				        </div>
+					</div>
+			      <!-- <div class="row cl">
+			        <div class="formControls col-xs-8 col-xs-offset-3">
+			          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
+			          <img src=""> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
+			      </div> -->
+			      	<div class="row cl">
+			      		<div class="formControls col-xs-8 col-xs-offset-3">
+				          	<label for="online">
+				          		<input id="online" name="online" type="checkbox" value=""> 使我保持登录状态
+				          	</label>
+			          	</div>
+			      	</div>
+			      	<div class="row cl">
+			      		<div class="formControls col-xs-8 col-xs-offset-3" style="text-align: center;">
+			      			<input id="loginBtn" name="loginBtn" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;">
+			      		</div>
+			      	</div>
+				</form>
+			</div>
+		</div>
+		<div class="footer">Copyright 你的公司名称 by H-ui.admin v3.1</div>
+		<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+		<script type="text/javascript" src="static/h-ui/js/H-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.md5.js"></script>
+		<script type="text/javascript">
+			var domain = 'http://localhost:8088';
+			$(function() {
+				var userName;
+				var loginState = window.sessionStorage.getItem('login_state');
+				if(loginState){
+					userName = window.sessionStorage.getItem('user_name');
+					var userToken = window.sessionStorage.getItem('user_token');
+					checkLoginStatus(userToken);
 				}else{
-					alert(result.message);
+					userName = window.localStorage.getItem('user_name');
+					var isOnline = window.localStorage.getItem('user_online');
+					if(isOnline){
+						var userToken = window.localStorage.getItem('user_token');
+						checkLoginStatus(userToken);
+					}
 				}
-			},
-			error: function(request, error) {
-				alert('无法连接网络或者返回值错误!');
-			}
-		});
-	});
-});
-
-function getStatus() {
-	var token = window.localStorage.getItem('user-token');
-	if(token && token.length > 0){
-		$.ajax({
-			url: domain + '/lottery/user/status',
-			type: 'POST',
-			dataType: 'json',
-			async: false,
-			beforeSend: function(xhr) {
-				xhr.setRequestHeader('Authorization', 'Basic'+token)
-			},
-			success: function (result) {
-				if(result.code == 200){
-					isLogin = true;
-					$('#welcomeSpan').html('您好，' + result.message);
-					$('#loginOrExit').val('退出').button("refresh");
-				}else{
-					window.localStorage.removeItem('token');
+				
+				if(userName && userName.length > 0){
+					$('#acc').val(userName);
 				}
-			},
-			error: function (request, error) {
-				window.localStorage.removeItem('token');
+				
+				var isOnline = window.localStorage.getItem('user_online');
+				if(isOnline){
+					$('#online').prop('checked', true);
+				}
+				
+				$('#loginBtn').click(function() {
+					var acc = $('#acc').val();
+					var pwd = $('#pwd').val();
+					var online = $('#online').is(":checked");
+					$.ajax({
+						url: domain + '/user/login',
+						type: 'POST',
+						async: false,
+						data: {
+							'acc': acc,
+							'pwd': $.md5(pwd)
+						},
+						success: function(result) {
+							if(result.code == 200){
+								if(online){
+									window.localStorage.setItem('user_online', true);
+									window.localStorage.setItem('user_name', result.data.acc);
+									window.localStorage.setItem('user_token', result.data.token);
+								}else{
+									window.localStorage.removeItem('user_online');
+								}
+								
+								window.sessionStorage.setItem('user_name', result.data.acc);
+								window.sessionStorage.setItem('user_token', result.data.token);
+								window.sessionStorage.setItem('login_state', true);
+								$(location).attr('href', 'index.html');
+							}else{
+								alert(result.message);
+							}
+						},
+						error: function(request, error) {
+							alert('无法连接网络或者返回值错误!');
+						}
+					});
+				});
+				
+				
+			});
+			
+			function checkLoginStatus(token) {
+				if(token && token.length > 0){
+					$.ajax({
+						url: domain + '/user/status',
+						type: 'POST',
+						dataType: 'json',
+						async: false,
+						beforeSend: function(xhr) {
+							xhr.setRequestHeader('Authorization', 'Basic' + token)
+						},
+						success: function (result) {
+							if(result.code == 200){
+								window.sessionStorage.setItem('user_name', result.data);
+								window.sessionStorage.setItem('user_token', token);
+								window.sessionStorage.setItem('login_state', true);
+								$(location).attr('href', 'index.html');
+							}else{
+								window.localStorage.removeItem('token');
+							}
+						},
+						error: function (request, error) {
+							window.localStorage.removeItem('token');
+						}
+					});
+				}
 			}
-		});
-	}
-}
-</script>
-</body>
+		</script>
+	</body>
 </html>
